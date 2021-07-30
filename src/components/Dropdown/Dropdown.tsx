@@ -1,7 +1,11 @@
 import * as React from 'react';
+import { observer } from 'mobx-react';
+import cn from 'classnames';
+
+import ArrowIcon from 'components/icons/ArrowIcon';
+import { IconDirection, IconSize } from 'components/icons/utils';
 
 import { SelectorItem, SelectorKey } from './config';
-import { observer } from 'mobx-react';
 import DropdownItem from './DropdownItem';
 
 import './Dropdown.modules.scss';
@@ -11,6 +15,9 @@ type Props = {
   optionIds: Array<SelectorKey>;
   selected: SelectorKey | null;
   handleChange: (selected: SelectorKey | null) => void;
+  opened: boolean;
+  onClose: () => void;
+  onOpen: () => void;
 };
 
 const Dropdown: React.FC<Props> = ({
@@ -18,22 +25,49 @@ const Dropdown: React.FC<Props> = ({
   optionIds,
   selected,
   handleChange,
+  opened,
+  onClose,
+  onOpen,
 }) => {
+  const handleArrowCLick = React.useCallback(() => {
+    opened ? onClose() : onOpen();
+  }, [opened]);
+
+  const handleChangeValue = React.useCallback((selectedKey: SelectorKey) => {
+    handleChange(selectedKey);
+    onClose();
+  }, []);
+
   return (
-    <div styleName="country-selector">
+    <div styleName="country-selector" onClick={handleArrowCLick}>
       <div styleName="country-selector__title">
-        {selected ? optionEntities[selected].emoji : 'Выберите...'}
+        {selected ? optionEntities[selected].emoji : 'Страна'}
+        <ArrowIcon
+          direction={opened ? IconDirection.top : IconDirection.bottom}
+          iconSize={IconSize.L}
+        />
       </div>
-      {optionIds.map(id => {
-        const country = optionEntities[id];
-        return (
-          <DropdownItem
-            onClick={handleChange}
-            value={country}
-            id={country.key}
-          />
-        );
-      })}
+      <div
+        styleName={cn(
+          'country-selector__popup',
+          opened && 'country-selector__popup_opened',
+        )}
+      >
+        {optionIds.map(id => {
+          if (id === selected) {
+            return null;
+          }
+          const country = optionEntities[id];
+          return (
+            <DropdownItem
+              key={country.key}
+              onClick={handleChangeValue}
+              value={country}
+              id={country.key}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };

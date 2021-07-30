@@ -1,0 +1,11 @@
+@import 'scss/constans';
+
+.content {
+  width: 400px;
+  margin: 100px auto;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  background: $interface-color-green;
+}

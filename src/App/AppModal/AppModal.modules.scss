@@ -13,11 +13,8 @@
 }
 
 .modal {
-  display: flex;
   background: $interface-color-white;
-  justify-content: center;
-  align-items: center;
   width: 500px;
-  height: 400px;
+  height: 450px;
   box-shadow: 0 0 2px 1px $color-black;
 }

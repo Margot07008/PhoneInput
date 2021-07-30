@@ -11,6 +11,6 @@ export const masks = [
     name: 'Lol',
     emoji: '🇳🇺',
     prefix: '+7',
-    mask: '(***) - *** - ** - **',
+    mask: '(123) - *** - ** - **',
   },
 ];
