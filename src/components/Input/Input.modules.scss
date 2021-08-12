@@ -1,0 +1,18 @@
+@import 'scss/constans';
+
+.input {
+  max-width: 17px;
+  background: $interface-color-green;
+  border: none;
+  font-size: 20px;
+  color: $interface-color-white;
+  text-align: center;
+
+  &:focus {
+    outline: none;
+  }
+
+  &_focused {
+    border: 1px solid $interface-color-orange;
+  }
+}

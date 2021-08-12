@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { SelectorItem, SelectorKey } from '../config';
 
+import './DropdownItem.modules.scss';
+
 type Props = {
   id: SelectorKey;
   onClick: (value: SelectorKey) => void;
@@ -9,12 +11,11 @@ type Props = {
 
 const DropdownItem: React.FC<Props> = ({ id, onClick, value }: Props) => {
   const handleCLick = React.useCallback(() => {
-    console.log(value);
     onClick(id);
   }, []);
 
   return (
-    <div onClick={handleCLick}>
+    <div styleName="dropdown-item" onClick={handleCLick}>
       {value.emoji} {value.key}
     </div>
   );

@@ -1,0 +1,9 @@
+@import 'scss/constans';
+
+.dropdown-item {
+  padding: 0 10px 0 20px;
+
+  &:hover {
+    background: $interface-color-blue_hover;
+  }
+}

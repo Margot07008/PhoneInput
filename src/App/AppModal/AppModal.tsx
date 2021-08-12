@@ -1,21 +1,22 @@
 import * as React from 'react';
 
-import PhoneInput from 'components/PhoneInput';
-
 import { masks } from 'shared/entities/phone/plugs';
+
+import PhoneInput from './PhoneInput';
 
 import './AppModal.modules.scss';
 
 const AppModal = () => {
-  const handleChange = React.useCallback(() => {
-    console.log('kek');
+  const handleChange = React.useCallback((value: string) => {
+    console.log(value);
   }, []);
+
   return (
     <div styleName="app-background">
       <div styleName="modal">
         <PhoneInput
           masks={masks}
-          value="+71234567890"
+          value="+7 12 3  456()7- -89-0"
           onChange={handleChange}
         />
       </div>
@@ -23,4 +24,4 @@ const AppModal = () => {
   );
 };
 
-export default AppModal;
+export default React.memo(AppModal);

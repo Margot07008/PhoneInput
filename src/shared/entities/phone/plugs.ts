@@ -10,7 +10,14 @@ export const masks = [
     key: 'kek',
     name: 'Lol',
     emoji: '🇳🇺',
-    prefix: '+7',
+    prefix: '+9',
     mask: '(123) - *** - ** - **',
+  },
+  {
+    key: 'test',
+    name: 'testtest',
+    emoji: '🤒',
+    prefix: '8',
+    mask: '(9876) ** 2* **',
   },
 ];

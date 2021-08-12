@@ -1,0 +1,16 @@
+@import 'scss/constans';
+
+.inputs-container {
+  display: flex;
+
+  &__text {
+    color: $interface-color-white;
+    font-size: 21px;
+    margin: 0 3px;
+  }
+
+  &__field {
+    margin: 0 3px;
+    border-bottom: 1px solid $interface-color-orange;
+  }
+}

@@ -1,19 +1,14 @@
-import {
-  action,
-  computed,
-  makeObservable,
-  observable,
-  runInAction,
-} from 'mobx';
+import { action, computed, makeObservable, observable } from 'mobx';
 
 import { IPhoneInputStore } from 'shared/entities/store/phoneInputStore';
-import { PhoneMask } from 'shared/entities/phone';
+import { PhoneMaskServer } from 'shared/entities/phone';
+import { PhoneMaskClient } from 'shared/entities/phone/client';
 
 export default class PhoneInputStore implements IPhoneInputStore {
-  masks: PhoneMask[];
+  masks: PhoneMaskServer[];
   selectedCountryKey: string | null = null;
 
-  constructor({ masks }: { masks: PhoneMask[] }) {
+  constructor({ masks }: { masks: PhoneMaskServer[] }) {
     makeObservable(this, {
       selectedCountryKey: observable,
 
@@ -29,9 +24,8 @@ export default class PhoneInputStore implements IPhoneInputStore {
     this.selectedCountryKey = value;
   };
 
-  get selectedCountryData(): PhoneMask | null {
+  get selectedCountryData(): PhoneMaskClient | null {
     if (this.selectedCountryKey) {
-      // @ts-ignore
       return this.sortedMasks.entities[this.selectedCountryKey];
     }
     return null;
@@ -45,6 +39,7 @@ export default class PhoneInputStore implements IPhoneInputStore {
           ...acc.entities,
           [item.key]: {
             ...item,
+            mask: item.mask.split(''),
             id: item.key,
           },
         },

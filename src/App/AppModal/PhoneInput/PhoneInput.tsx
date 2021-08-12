@@ -1,21 +1,35 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
+import cn from 'classnames';
 
-import { PhoneMask } from 'shared/entities/phone';
-import { useLocal } from 'shared/utils/useLocal';
+import { PhoneMaskServer } from 'shared/entities/phone';
+import { useLocalStore } from 'shared/utils/useLocal';
 import PhoneInputStore from 'stores/PhoneInputStore';
 import Dropdown from 'components/Dropdown';
+import NumbersStore from 'stores/NumbersStore';
+
+import NumberInput from './NumberInput';
 
 import './PhoneInput.modules.scss';
 
 type Props = {
-  masks: PhoneMask[];
+  masks: PhoneMaskServer[];
   value: string;
-  onChange: () => void;
+  onChange: (value: string) => void;
 };
 
 const PhoneInput: React.FC<Props> = ({ masks, value, onChange }: Props) => {
-  const store = useLocal(() => new PhoneInputStore({ masks: masks }));
+  const store = useLocalStore(() => new PhoneInputStore({ masks: masks }));
+  const storeNumber = React.useMemo(() => {
+    if (!store.selectedCountryData) {
+      return null;
+    }
+    return new NumbersStore({
+      phoneNumber: store.selectedCountryData,
+      value: value,
+    });
+  }, [store.selectedCountryData]);
+
   const [openedPopup, setOpenedPopup] = React.useState(false);
 
   const handleCLosePopup = React.useCallback(() => {
@@ -33,6 +47,7 @@ const PhoneInput: React.FC<Props> = ({ masks, value, onChange }: Props) => {
   return (
     <div styleName="content" onClick={handleCLosePopup}>
       <Dropdown
+        styleName={cn('dropdown', !storeNumber && 'dropdown_margin')}
         opened={openedPopup}
         onClose={handleCLosePopup}
         onOpen={handleOpenPopup}
@@ -41,7 +56,7 @@ const PhoneInput: React.FC<Props> = ({ masks, value, onChange }: Props) => {
         optionEntities={store.sortedMasks.entities}
         optionIds={store.sortedMasks.keys}
       />
-      <div>{store.selectedCountryData?.mask}</div>
+      {storeNumber && <NumberInput store={storeNumber} onChange={onChange} />}
     </div>
   );
 };

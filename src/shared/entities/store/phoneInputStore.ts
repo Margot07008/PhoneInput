@@ -1,5 +1,5 @@
-import { PhoneMask } from '../phone';
+import { PhoneMaskServer } from '../phone';
 
 export interface IPhoneInputStore {
-  masks: PhoneMask[];
+  masks: PhoneMaskServer[];
 }

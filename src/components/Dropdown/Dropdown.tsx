@@ -18,6 +18,7 @@ type Props = {
   opened: boolean;
   onClose: () => void;
   onOpen: () => void;
+  className?: string;
 };
 
 const Dropdown: React.FC<Props> = ({
@@ -28,18 +29,21 @@ const Dropdown: React.FC<Props> = ({
   opened,
   onClose,
   onOpen,
+  className,
 }) => {
-  const handleArrowCLick = React.useCallback(() => {
-    opened ? onClose() : onOpen();
-  }, [opened]);
-
   const handleChangeValue = React.useCallback((selectedKey: SelectorKey) => {
     handleChange(selectedKey);
     onClose();
   }, []);
 
   return (
-    <div styleName="country-selector" onClick={handleArrowCLick}>
+    <div
+      className={className}
+      styleName="country-selector"
+      onClick={onOpen}
+      onMouseOver={onOpen}
+      onMouseLeave={onClose}
+    >
       <div styleName="country-selector__title">
         {selected ? optionEntities[selected].emoji : 'Страна'}
         <ArrowIcon
