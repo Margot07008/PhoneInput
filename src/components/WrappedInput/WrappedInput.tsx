@@ -10,6 +10,8 @@ const WrappedInput: React.FC<WrappedInputProps> = ({
   actualIdx,
   type,
   maxLength,
+  isActive,
+  onClick,
 }: WrappedInputProps) => {
   const handleChange = React.useCallback(
     (text: string) => {
@@ -18,12 +20,18 @@ const WrappedInput: React.FC<WrappedInputProps> = ({
     [onChange],
   );
 
+  const handleClick = React.useCallback(() => {
+    onClick(actualIdx);
+  }, [onClick]);
+
   return (
     <Input
       maxLength={maxLength}
       type={type}
       value={value}
       onChange={handleChange}
+      isFocused={isActive}
+      onFocus={handleClick}
     />
   );
 };

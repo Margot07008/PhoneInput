@@ -1,5 +1,4 @@
 import * as React from 'react';
-import cn from 'classnames';
 
 import { BaseInputProps, InputType } from 'shared/entities/input';
 
@@ -19,6 +18,9 @@ const Input: React.FC<BaseInputProps> = ({
   React.useEffect(() => {
     if (inputRef.current && isFocused) {
       inputRef.current.focus();
+      if (maxLength) {
+        inputRef.current.selectionEnd = maxLength;
+      }
     }
   }, [isFocused]);
 
@@ -32,7 +34,7 @@ const Input: React.FC<BaseInputProps> = ({
   return (
     <input
       type={type}
-      styleName={cn('input', isFocused && 'input_focused')}
+      styleName="input"
       placeholder={placeholder}
       value={value}
       onFocus={onFocus}

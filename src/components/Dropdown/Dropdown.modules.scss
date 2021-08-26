@@ -7,18 +7,21 @@
   &__title {
     display: flex;
     align-items: center;
-    padding-left: 20px;
+    padding-left: $indent-s;
   }
 
   &__popup {
+    $local-popup-width: 100px;
+    $local-popup-max-height: 200px;
+
     display: none;
     position: absolute;
-    max-height: 200px;
+    max-height: $local-popup-max-height;
     overflow-y: scroll;
     background: $interface-color-blue;
-    width: 100px;
-    padding: 2px 0 2px 0;
-    border-radius: 10px;
+    width: $local-popup-width;
+    padding: $indent-xxxxs 0;
+    border-radius: $indent-s;
 
     &_opened {
       display: block;

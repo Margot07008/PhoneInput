@@ -15,7 +15,7 @@ export default class PhoneInputStore implements IPhoneInputStore {
       selectCountyKey: action,
 
       sortedMasks: computed,
-      selectedCountryData: computed,
+      selectedCountryData: computed
     });
     this.masks = masks;
   }

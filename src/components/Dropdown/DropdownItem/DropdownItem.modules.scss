@@ -1,7 +1,7 @@
 @import 'scss/constans';
 
 .dropdown-item {
-  padding: 0 10px 0 20px;
+  padding: 0 $indent-xss 0 $indent-s;
 
   &:hover {
     background: $interface-color-blue_hover;

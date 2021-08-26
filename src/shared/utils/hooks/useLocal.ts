@@ -12,7 +12,7 @@ export const useLocal = <T>(creator: () => T): T => {
 
 export interface ILocalStore {}
 
-export const useLocalStore = <T extends ILocalStore>(creator: () => T): T => {
+const useLocalStore = <T extends ILocalStore>(creator: () => T): T => {
   const store = useLocal(creator);
 
   React.useEffect(() => {
@@ -21,3 +21,5 @@ export const useLocalStore = <T extends ILocalStore>(creator: () => T): T => {
 
   return store;
 };
+
+export default useLocalStore;

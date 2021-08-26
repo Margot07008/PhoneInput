@@ -1,5 +1,8 @@
 @import 'scss/constans';
 
+$local-modal-width: 600px;
+$local-modal-height: 450px;
+
 .app-background {
   position: absolute;
   top: 0;
@@ -14,7 +17,7 @@
 
 .modal {
   background: $interface-color-white;
-  width: 600px;
-  height: 450px;
-  box-shadow: 0 0 2px 1px $color-black;
+  width: $local-modal-width;
+  height: $local-modal-height;
+  box-shadow: 0 0 $indent-xxxxs $indent-xxxxxs $color-black;
 }

@@ -13,6 +13,8 @@ export type BaseInputProps = {
 export type WrappedInputProps = Omit<BaseInputProps, 'onChange'> & {
   actualIdx: string | number;
   onChange: (actualIdx: string | number, value: string) => void;
+  isActive: boolean;
+  onClick: (actualIdx: string | number) => void;
 };
 
 export enum InputType {

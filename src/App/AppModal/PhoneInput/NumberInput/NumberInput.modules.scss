@@ -1,16 +1,21 @@
 @import 'scss/constans';
 
 .inputs-container {
+  $local-margin-side: 3px;
   display: flex;
 
   &__text {
     color: $interface-color-white;
     font-size: 21px;
-    margin: 0 3px;
+    margin: 0 $local-margin-side;
   }
 
   &__field {
-    margin: 0 3px;
-    border-bottom: 1px solid $interface-color-orange;
+    margin: 0 $local-margin-side;
+    border-bottom: $indent-xxxxs solid $interface-color-orange;
+
+    &_error {
+      border-bottom: $indent-xxxxs solid $interface-color-red;
+    }
   }
 }

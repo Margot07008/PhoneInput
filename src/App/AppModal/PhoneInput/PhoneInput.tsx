@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import cn from 'classnames';
 
 import { PhoneMaskServer } from 'shared/entities/phone';
-import { useLocalStore } from 'shared/utils/useLocal';
+import { useLocalStore } from 'shared/utils/hooks';
 import PhoneInputStore from 'stores/PhoneInputStore';
 import Dropdown from 'components/Dropdown';
 import NumbersStore from 'stores/NumbersStore';
@@ -45,19 +45,26 @@ const PhoneInput: React.FC<Props> = ({ masks, value, onChange }: Props) => {
   }, [openedPopup]);
 
   return (
-    <div styleName="content" onClick={handleCLosePopup}>
-      <Dropdown
-        styleName={cn('dropdown', !storeNumber && 'dropdown_margin')}
-        opened={openedPopup}
-        onClose={handleCLosePopup}
-        onOpen={handleOpenPopup}
-        selected={store.selectedCountryKey}
-        handleChange={store.selectCountyKey}
-        optionEntities={store.sortedMasks.entities}
-        optionIds={store.sortedMasks.keys}
-      />
-      {storeNumber && <NumberInput store={storeNumber} onChange={onChange} />}
-    </div>
+    <>
+      <div styleName="content" onClick={handleCLosePopup}>
+        <Dropdown
+          styleName={cn('dropdown', !storeNumber && 'dropdown_margin')}
+          opened={openedPopup}
+          onClose={handleCLosePopup}
+          onOpen={handleOpenPopup}
+          selected={store.selectedCountryKey}
+          handleChange={store.selectCountyKey}
+          optionEntities={store.sortedMasks.entities}
+          optionIds={store.sortedMasks.keys}
+        />
+        {storeNumber && <NumberInput store={storeNumber} onChange={onChange} />}
+      </div>
+      {storeNumber && !storeNumber.isUserInputValid && (
+        <div styleName="content__error-message">
+          Некорректный номер телефона!
+        </div>
+      )}
+    </>
   );
 };
 
