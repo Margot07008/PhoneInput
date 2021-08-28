@@ -7,7 +7,8 @@
     "dev": "NODE_ENV=development npx webpack server",
     "build": "NODE_ENV=production npx webpack --mode production",
     "ts-check": "tsc --skipLibCheck --noEmit --project tsconfig.json",
-    "prettier": "prettier --write ./src"
+    "prettier": "prettier --write ./src",
+    "test": "NODE_ENV=development jest"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.5",
@@ -17,10 +18,12 @@
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.14.5",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
+    "@types/jest": "^27.0.1",
     "@types/react": "^17.0.14",
     "@types/react-css-modules": "^4.6.4",
     "@types/react-dom": "^17.0.9",
     "autoprefixer": "^10.3.1",
+    "babel-jest": "^27.0.6",
     "babel-loader": "^8.2.2",
     "babel-plugin-react-css-modules": "^5.2.6",
     "babel-preset-mobx": "^2.0.0",
@@ -34,6 +37,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "fork-ts-checker-webpack-plugin": "^6.2.12",
     "html-webpack-plugin": "^5.3.2",
+    "jest": "^27.0.6",
     "mini-css-extract-plugin": "^2.1.0",
     "node-sass": "^6.0.1",
     "postcss-loader": "^6.1.1",
@@ -59,5 +63,11 @@
     "prettier": "^2.3.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
+  },
+  "jest": {
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ]
   }
 }

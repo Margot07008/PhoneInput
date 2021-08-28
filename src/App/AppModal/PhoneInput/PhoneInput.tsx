@@ -30,6 +30,8 @@ const PhoneInput: React.FC<Props> = ({ masks, value, onChange }: Props) => {
     });
   }, [store.selectedCountryData]);
 
+  console.log({ value: value, refactor: storeNumber?.fields });
+
   const [openedPopup, setOpenedPopup] = React.useState(false);
 
   const handleCLosePopup = React.useCallback(() => {

@@ -3,12 +3,7 @@ import {
   NumberFieldsClient,
   PhoneMaskClient,
 } from 'shared/entities/phone/client';
-import {
-  ARROW_LEFT_KEYS,
-  ARROW_RIGHT_KEYS,
-  BACKSPACE_KEYS,
-  ENTER_KEYS,
-} from 'shared/utils/keyCodes';
+import keyCodes from 'shared/utils/keyCodes';
 
 export default class NumbersStore {
   fields: NumberFieldsClient[];
@@ -17,6 +12,7 @@ export default class NumbersStore {
   phoneNumber: PhoneMaskClient;
   actualNumberPosition: number = -1;
   isUserInputValid: boolean = true;
+  indexesOfStars: number[] = [];
 
   constructor({
     phoneNumber,
@@ -32,6 +28,7 @@ export default class NumbersStore {
       phoneNumber: observable,
       actualNumberPosition: observable,
       isUserInputValid: observable,
+      indexesOfStars: observable,
 
       setActiveField: action,
       setField: action,
@@ -42,7 +39,7 @@ export default class NumbersStore {
       setPrevActiveField: action,
       handleKeydown: action,
 
-      inputResult: computed
+      inputResult: computed,
     });
 
     this.phoneNumber = phoneNumber;
@@ -73,8 +70,11 @@ export default class NumbersStore {
       return [];
     }
 
-    return phoneNumber.mask.map(item => {
+    return phoneNumber.mask.map((item, idx) => {
       const isStar = item === '*';
+      if (isStar) {
+        this.indexesOfStars.push(idx);
+      }
       const isNumber = !!item.match(/[0-9]/) || isStar;
       if (isNumber || isStar) {
         this.actualNumberPosition++;
@@ -113,40 +113,35 @@ export default class NumbersStore {
     if (!this.activeField) {
       return;
     }
-    const array = this.fields.slice(this.activeField + 1);
-    array.some((item, idx) => {
-      if (item.canEdit && this.activeField) {
-        this.activeField += idx + 1;
-        return true;
-      }
-      return false;
-    });
+    const nextPosition = this.indexesOfStars.indexOf(this.activeField) + 1;
+    if (nextPosition >= 0 && nextPosition < this.indexesOfStars.length) {
+      this.activeField = this.indexesOfStars[nextPosition];
+    }
   };
 
   setPrevActiveField = (): void => {
     if (!this.activeField) {
       return;
     }
-    const array = this.fields.slice(0, this.activeField);
-    array.forEach((item, idx) => {
-      if (item.canEdit && this.activeField) {
-        this.activeField = idx;
-      }
-    });
+    const prevPosition = this.indexesOfStars.indexOf(this.activeField) - 1;
+    if (prevPosition >= 0 && prevPosition <= this.indexesOfStars.length) {
+      this.activeField = this.indexesOfStars[prevPosition];
+    }
   };
 
   handleKeydown = ({ key }): void => {
-    if (ENTER_KEYS.includes(String(key))) {
+    if (keyCodes.ENTER_KEYS.includes(String(key))) {
       this.validateUserInput();
     }
-    if (ARROW_RIGHT_KEYS.includes(String(key))) {
+    if (keyCodes.ARROW_RIGHT_KEYS.includes(String(key))) {
       this.setNextActiveField();
     }
-    if ((ARROW_LEFT_KEYS.includes(String(key))) || (
-      BACKSPACE_KEYS.includes(String(key)) &&
-      this.activeField &&
-      this.fields[this.activeField].value === ''
-    )) {
+    if (
+      keyCodes.ARROW_LEFT_KEYS.includes(String(key)) ||
+      (keyCodes.BACKSPACE_KEYS.includes(String(key)) &&
+        this.activeField &&
+        this.fields[this.activeField].value === '')
+    ) {
       this.setPrevActiveField();
     }
   };
