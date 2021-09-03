@@ -1,4 +1,5 @@
 export type PhoneMaskClient = {
+  id: string;
   key: string;
   name: string;
   emoji: string;

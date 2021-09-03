@@ -78,7 +78,8 @@ module.exports = {
     rules: [
       {
         test: /\.([jt])sx?$/,
-        use: 'babel-loader'
+        exclude: /node_modules/,
+        use: 'babel-loader',
       },
       {
         test: /\.modules.s?css$/,

@@ -3,7 +3,7 @@ module.exports = api => {
   const isProd = process.env.NODE_ENV === 'production';
 
   const presets = [
-    "@babel/preset-env",
+    ['@babel/preset-env', {targets: {node: 'current'}}],
     "@babel/preset-react",
     '@babel/preset-typescript',
     'babel-preset-mobx'

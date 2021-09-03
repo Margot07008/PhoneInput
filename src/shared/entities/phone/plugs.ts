@@ -1,4 +1,6 @@
-export const masks = [
+import { PhoneMaskServer } from 'shared/entities/phone/server';
+
+export const masks: PhoneMaskServer[] = [
   {
     key: 'ru',
     name: 'Россия',
