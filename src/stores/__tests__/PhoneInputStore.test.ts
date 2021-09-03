@@ -1,6 +1,5 @@
 import PhoneInputStore from '../PhoneInputStore';
-import { PhoneMaskServer } from 'shared/entities/phone';
-import { PhoneMaskClient } from 'shared/entities/phone/client';
+import { PhoneMaskServer, PhoneMaskClient } from 'shared/entities/phone';
 
 describe('Стор с масками', () => {
   const masks: PhoneMaskServer[] = [

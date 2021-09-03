@@ -3,7 +3,7 @@ import {
   NumberFieldsClient,
   PhoneMaskClient,
 } from 'shared/entities/phone/client';
-import keyCodes from 'shared/utils/keyCodes';
+import { keyCodes } from 'shared/utils/keyCodes';
 
 export default class NumbersStore {
   fields: NumberFieldsClient[];

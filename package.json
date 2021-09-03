@@ -1,5 +1,12 @@
 {
   "name": "phoneInput",
+  "jest": {
+    "verbose": true,
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ]
+  },
   "version": "1.0.0",
   "main": "src/index.js",
   "license": "MIT",
@@ -8,7 +15,7 @@
     "build": "NODE_ENV=production npx webpack --mode production",
     "ts-check": "tsc --skipLibCheck --noEmit --project tsconfig.json",
     "prettier": "prettier --write ./src",
-    "test": "NODE_ENV=development jest"
+    "test": "NODE_ENV=development jest --silent"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.5",
@@ -18,10 +25,12 @@
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.14.5",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
+    "@testing-library/react": "^12.0.0",
     "@types/jest": "^27.0.1",
     "@types/react": "^17.0.14",
     "@types/react-css-modules": "^4.6.4",
     "@types/react-dom": "^17.0.9",
+    "@types/testing-library__react": "^10.2.0",
     "autoprefixer": "^10.3.1",
     "babel-jest": "^27.0.6",
     "babel-loader": "^8.2.2",
@@ -37,9 +46,10 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "fork-ts-checker-webpack-plugin": "^6.2.12",
     "html-webpack-plugin": "^5.3.2",
-    "jest": "^27.0.6",
+    "jest": "^27.1.0",
     "mini-css-extract-plugin": "^2.1.0",
     "node-sass": "^6.0.1",
+    "postcss": "^8",
     "postcss-loader": "^6.1.1",
     "postcss-nested": "^4.2.1",
     "postcss-scss": "^2.0.0",
@@ -47,6 +57,7 @@
     "sass-loader": "^12.1.0",
     "style-loader": "^3.1.0",
     "terser-webpack-plugin": "^5.1.4",
+    "ts-jest": "^27.0.5",
     "typescript": "^4.3.5",
     "webpack": "^5.45.1",
     "webpack-cli": "^4.7.2",
@@ -56,18 +67,17 @@
     "last 2 versions"
   ],
   "dependencies": {
+    "@jest/types": "^27.1.0",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/user-event": "^13.2.1",
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.3.1",
     "mobx": "^6.3.2",
     "mobx-react": "^7.2.0",
+    "postcss-color-rebeccapurple": "^6.0.0",
+    "postcss-flexbugs-fixes": "^5.0.2",
     "prettier": "^2.3.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
-  },
-  "jest": {
-    "moduleDirectories": [
-      "node_modules",
-      "src"
-    ]
   }
 }

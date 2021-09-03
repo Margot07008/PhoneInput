@@ -3,7 +3,6 @@
     "baseUrl": "src",
     "paths": {
       "App/*": ["App/*"],
-      "lib/*": ["lib/*"],
       "components/*": ["components/*"],
       "scss/*": ["scss/*"],
       "shared/*": ["shared/*"],
@@ -22,7 +21,8 @@
     "allowUnusedLabels": false,
     "noImplicitReturns": true,
     "strictNullChecks": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "esModuleInterop": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
