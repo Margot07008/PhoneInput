@@ -19,7 +19,7 @@ module.exports = api => {
             'plugins': ['postcss-nested']
           }
         },
-        'generateScopedName': !isProd ? '[path][name]__[local]' : '[hash:base64]',
+        'generateScopedName': '[path][name]__[local]',
         'webpackHotModuleReloading': true,
         'autoResolveMultipleImports': true
       }

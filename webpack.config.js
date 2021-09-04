@@ -7,6 +7,7 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin');
 const TerserPlugin = require("terser-webpack-plugin");
+const autoprefixer = require('autoprefixer');
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -15,7 +16,7 @@ const plugins = [
     template: path.join(srcPath, 'index.html')
   }),
   !isProd && new ReactRefreshWebpackPlugin(),
-  isProd && new MiniCssExtractPlugin(
+  new MiniCssExtractPlugin(
     {
       filename: '[name]-[hash].css'
     }
@@ -26,14 +27,16 @@ const plugins = [
 const getCssRules = (withModules) => {
   return [
     isProd ? MiniCssExtractPlugin.loader : 'style-loader',
-    withModules ? {
+    {
       loader: 'css-loader',
       options: {
-        modules:{
-          localIdentName: !isProd ? '[path][name]__[local]' : '[hash:base64]'
-        }
+        modules: withModules && {
+          localIdentName: '[path][name]__[local]'
+        },
+        importLoaders: 1,
+        sourceMap: false
       }
-    } : 'css-loader',
+    },
     {
       loader: "postcss-loader",
       options: {
@@ -44,7 +47,14 @@ const getCssRules = (withModules) => {
         },
       },
     },
-    'sass-loader'
+    {
+      loader: 'sass-loader',
+      options: {
+        sassOptions: {
+          includePaths: [srcPath]
+        }
+      }
+    }
   ]
 }
 
@@ -114,8 +124,8 @@ module.exports = {
   },
   devtool: isProd ? 'hidden-source-map' : 'eval-source-map',
   devServer: {
-    host: '127.0.0.1',
-    port: 9002,
+    host: '0.0.0.0',
+    port: 8080,
     hot: true,
     inline: true
   }
